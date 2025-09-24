@@ -54,6 +54,7 @@ public class JwtService {
 
     public String generateToken(User user){
         String token = Jwts.builder().subject(user.getUsername())
+                .claim("role", user.getRole())
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + 3600000))     // One Hour
                 .signWith(getSigninKey())

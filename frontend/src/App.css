@@ -1,38 +1,113 @@
+body {
+	background: red;
+}
+
 .App {
-  text-align: center;
+	text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+	height: 40vmin;
+	pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+	.App-logo {
+		animation: App-logo-spin infinite 20s linear;
+	}
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+	background-color: #282c34;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
 }
 
 .App-link {
-  color: #61dafb;
+	color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.view {
+	display: flex;
+	flex-direction: row;
+	background-color: rgb(34, 34, 34);
+	color: white;
+	/* justify-content: center; */
+	/* align-items: flex-end; */
+}
+
+.login {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	height: 100vh;
+	justify-content: center;
+	align-items: center;
+	background-color: rgb(34, 34, 34);
+	color: #eeeeee;
+}
+
+.login form {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.login form div {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.login form div input {
+	border: 2px solid rgb(38, 157, 217);
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 10px;
+	width: 350px;
+	height: 50px;
+	background-color: transparent;
+	color: white;
+}
+
+.login form div input:focus {
+	border: 2px solid red;
+}
+
+.login form button {
+	margin-top: 20px;
+	width: 350px;
+	height: 50px;
+	border-radius: 10px;
+	background-color: transparent;
+	border: 2px solid rgb(38, 157, 217);
+	color: white;
+}
+
+.login form button:hover {
+	width: 350px;
+	height: 50px;
+	border-radius: 10px;
+
+	background-color: rgb(38, 157, 217);
+	color: white;
+	border: none;
+}
+
+.login p{
+	color: #ff3535;
 }
