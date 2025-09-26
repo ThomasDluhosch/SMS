@@ -3,3 +3,19 @@
     flex-direction: column;
     gap: 2rem;
 }
+
+table tr th{
+    padding: 1rem;
+    border-bottom: 1px solid rgb(0, 9, 14);
+    cursor: default;
+}
+
+table tr td{
+    padding: 1rem;
+    border-bottom: 1px solid rgb(0, 9, 14);
+    cursor: pointer;
+}
+
+table tbody tr:hover{
+    background: rgb(0, 121, 185);
+}
