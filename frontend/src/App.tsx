@@ -4,8 +4,8 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
-import UserTable from "./components/UserTable";
-import CreateUser from "./components/CreateUser";
+import Users from "./components/Users/Users";
+import CreateUser from "./components/Users/CreateUser";
 
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
 
                 <Route element={<ProtectedRoute allowedRoles={['ADMIN']} />}>
-                    <Route path="/users" element={<UserTable />} />
+                    <Route path="/users" element={<Users />} />
                     <Route path="/create-user" element={<CreateUser />} />
                 </Route>
 

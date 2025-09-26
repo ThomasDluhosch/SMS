@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import SideBar from "./SideBar";
 
 function UserTable() {
 	const [users, setUsers] = useState([]);
@@ -66,50 +65,49 @@ function UserTable() {
 		return <div>Lade Benutzerdaten...</div>;
 	}
 
-	const handleCreateUser = () => {
-		navigate("/create-user");
-	};
+	function formatDate(dateString: string) {
+		const date = new Date(dateString);
+
+		const options: Intl.DateTimeFormatOptions = {
+			day: "2-digit",
+			month: "2-digit",
+			year: "numeric",
+		};
+
+		return date.toLocaleDateString("de-DE", options);
+	}
 
 	return (
-		<div className="view">
-			<SideBar />
-			<div className="user-table-container">
-				<button onClick={handleCreateUser} className="create-user-btn">
-					Neuen Benutzer anlegen
-				</button>
-				<h1>User-Liste</h1>
-				<table>
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>Vorname</th>
-							<th>Nachname</th>
-							<th>Username</th>
-							<th>Geburtstag</th>
-							<th>Einstellung</th>
-							<th>Wochenarbeitsstunden</th>
-							<th>Urlaubstage</th>
-							<th>Rolle</th>
-						</tr>
-					</thead>
-					<tbody>
-						{users.map((user: any) => (
-							<tr key={user.id}>
-								<td>{user.id}</td>
-								<td>{user.firstName}</td>
-								<td>{user.lastName}</td>
-								<td>{user.username}</td>
-								<td>{user.birthday}</td>
-								<td>{user.hiringDate}</td>
-								<td>{user.workingHours}</td>
-								<td>{user.vacationDaysLeft}</td>
-								<td>{user.role}</td>
-							</tr>
-						))}
-					</tbody>
-				</table>
-			</div>
-		</div>
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Vorname</th>
+					<th>Nachname</th>
+					<th>Username</th>
+					<th>Geburtstag</th>
+					<th>Einstellung</th>
+					<th>Wochenarbeitsstunden</th>
+					<th>Urlaubstage</th>
+					<th>Rolle</th>
+				</tr>
+			</thead>
+			<tbody>
+				{users.map((user: any) => (
+					<tr key={user.id}>
+						<td>{user.id}</td>
+						<td>{user.firstName}</td>
+						<td>{user.lastName}</td>
+						<td>{user.username}</td>
+						<td>{formatDate(user.birthday)}</td>
+						<td>{formatDate(user.hiringDate)}</td>
+						<td>{user.workingHours}</td>
+						<td>{user.vacationDaysLeft}</td>
+						<td>{user.role}</td>
+					</tr>
+				))}
+			</tbody>
+		</table>
 	);
 }
 

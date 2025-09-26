@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import SideBar from "./SideBar";
+import SideBar from "../SideBar";
 
 function CreateUser() {
 	const [formData, setFormData] = useState({
@@ -57,6 +57,11 @@ function CreateUser() {
 			});
 	};
 
+	const generatedUsername =
+		formData.firstName && formData.lastName
+			? `${formData.firstName}-${formData.lastName}`
+			: "";
+
 	return (
 		<div className="view">
 			<SideBar />
@@ -85,6 +90,11 @@ function CreateUser() {
 							required
 						/>
 					</div>
+					{
+						<div className="form-group-info">
+							Nutzername: {generatedUsername}
+						</div>
+					}
 					<div className="form-group">
 						<label htmlFor="birthday">Geburtstag</label>
 						<input
