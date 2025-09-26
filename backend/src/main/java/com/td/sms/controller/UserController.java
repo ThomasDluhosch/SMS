@@ -2,10 +2,10 @@ package com.td.sms.controller;
 
 import com.td.sms.model.User;
 import com.td.sms.repository.UserRepository;
+import com.td.sms.service.AuthenticationService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,15 +15,22 @@ import java.util.List;
 public class UserController {
 
     private final UserRepository userRepository;
+    private final AuthenticationService authenticationService;
 
-
-    public UserController(UserRepository userRepository) {
+    public UserController(UserRepository userRepository, AuthenticationService authenticationService) {
         this.userRepository = userRepository;
+        this.authenticationService = authenticationService;
     }
 
     @GetMapping("/api/users")
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userRepository.findAll();
         return ResponseEntity.ok(users);
+    }
+
+    @PostMapping("/api/createUser")
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        User savedUser = authenticationService.createUser(user);
+        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 }

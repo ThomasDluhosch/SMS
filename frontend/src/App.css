@@ -111,3 +111,18 @@ body {
 .login p{
 	color: #ff3535;
 }
+
+.create-user-btn{
+	height: 3rem;
+	width: 15rem;
+	border-radius: 10px;
+	border: 2px solid rgb(38, 157, 217);
+	background: transparent;
+	color: rgb(38, 157, 217);
+}
+
+.create-user-btn:hover{
+	border: 2px solid rgb(38, 157, 217);
+	background: rgb(38, 157, 217);
+	color: white;
+}

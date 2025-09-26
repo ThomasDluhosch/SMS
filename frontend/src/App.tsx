@@ -5,6 +5,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
 import UserTable from "./components/UserTable";
+import CreateUser from "./components/CreateUser";
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
 
                 <Route element={<ProtectedRoute allowedRoles={['ADMIN']} />}>
                     <Route path="/users" element={<UserTable />} />
+                    <Route path="/create-user" element={<CreateUser />} />
                 </Route>
 
                 <Route element={<ProtectedRoute allowedRoles={['ADMIN', 'USER']} />}>

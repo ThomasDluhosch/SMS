@@ -65,10 +65,17 @@ function UserTable() {
 		return <div>Lade Benutzerdaten...</div>;
 	}
 
+	const handleCreateUser = () => {
+		navigate("/create-user");
+	};
+
 	return (
 		<div className="view">
 			<SideBar />
 			<div className="user-table-container">
+				<button onClick={handleCreateUser} className="create-user-btn">
+					Neuen Benutzer anlegen
+				</button>
 				<h1>User-Liste</h1>
 				<table>
 					<thead>

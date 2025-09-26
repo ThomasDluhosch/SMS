@@ -52,4 +52,17 @@ public class AuthenticationService {
 
         return new AuthenticationResponse(token);
     }
+
+    public User createUser(User request) {
+        User user = new User();
+        user.setFirstName(request.getFirstName());
+        user.setLastName(request.getLastName());
+        user.setUsername(request.getUsername());
+
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+
+        user.setRole(request.getRole());
+
+        return userRepository.save(user);
+    }
 }
