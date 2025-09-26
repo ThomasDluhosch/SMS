@@ -6,9 +6,12 @@ function CreateUser() {
 	const [formData, setFormData] = useState({
 		firstName: "",
 		lastName: "",
-		username: "",
 		password: "",
 		role: "USER",
+		birthday: "",
+		hiringDate: "",
+		workingHours: 0,
+		vacationDaysLeft: 0,
 	});
 
 	const [error, setError] = useState<string | null>(null);
@@ -83,14 +86,47 @@ function CreateUser() {
 						/>
 					</div>
 					<div className="form-group">
-						<label htmlFor="username">Username</label>
+						<label htmlFor="birthday">Geburtstag</label>
 						<input
-							type="text"
-							id="username"
-							name="username"
-							value={formData.username}
+							type="date"
+							id="birthday"
+							name="birthday"
+							value={formData.birthday}
 							onChange={handleChange}
-							required
+						/>
+					</div>
+					<div className="form-group">
+						<label htmlFor="hiringDate">Einstellungsdatum</label>
+						<input
+							type="date"
+							id="hiringDate"
+							name="hiringDate"
+							value={formData.hiringDate}
+							onChange={handleChange}
+						/>
+					</div>
+					<div className="form-group">
+						<label htmlFor="workingHours">
+							Arbeitsstunden/Woche
+						</label>
+						<input
+							type="number"
+							id="workingHours"
+							name="workingHours"
+							value={formData.workingHours}
+							onChange={handleChange}
+						/>
+					</div>
+					<div className="form-group">
+						<label htmlFor="vacationDaysLeft">
+							Verbleibende Urlaubstage
+						</label>
+						<input
+							type="number"
+							id="vacationDaysLeft"
+							name="vacationDaysLeft"
+							value={formData.vacationDaysLeft}
+							onChange={handleChange}
 						/>
 					</div>
 					<div className="form-group">

@@ -45,6 +45,7 @@ function UserTable() {
 			})
 			.then((data) => {
 				setUsers(data);
+				console.log(data);
 			})
 			.catch((error) => {
 				if (
@@ -84,6 +85,10 @@ function UserTable() {
 							<th>Vorname</th>
 							<th>Nachname</th>
 							<th>Username</th>
+							<th>Geburtstag</th>
+							<th>Einstellung</th>
+							<th>Wochenarbeitsstunden</th>
+							<th>Urlaubstage</th>
 							<th>Rolle</th>
 						</tr>
 					</thead>
@@ -94,6 +99,10 @@ function UserTable() {
 								<td>{user.firstName}</td>
 								<td>{user.lastName}</td>
 								<td>{user.username}</td>
+								<td>{user.birthday}</td>
+								<td>{user.hiringDate}</td>
+								<td>{user.workingHours}</td>
+								<td>{user.vacationDaysLeft}</td>
 								<td>{user.role}</td>
 							</tr>
 						))}
