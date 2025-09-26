@@ -6,6 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -26,12 +27,23 @@ public class User implements UserDetails {
     @Column(name = "username")
     private String username;
 
+    @Column(name = "birthday")
+    private Date birthday;
+
+    @Column(name = "hiring_date")
+    private Date hiringDate;
+
+    @Column(name = "working_hours")
+    private Float workingHours;
+
+    @Column(name = "vacation_days_left")
+    private Integer vacationDaysLeft;
+
     @Column(name = "password")
     private String password;
 
     @Enumerated(EnumType.STRING)
     private Role role;
-
 
 
     public Integer getId() {
@@ -58,6 +70,13 @@ public class User implements UserDetails {
         return role;
     }
 
+    public Date getBirthday() {return birthday;}
+
+    public Date getHiringDate() {return hiringDate;}
+
+    public Float getWorkingHours() {return workingHours;}
+
+    public Integer getVacationDaysLeft() {return vacationDaysLeft;}
 
 
     public void setId(Integer id) {
@@ -76,6 +95,14 @@ public class User implements UserDetails {
         this.username = username;
     }
 
+    public void setBirthday(Date birthday) {this.birthday = birthday;}
+
+    public void setHiringDate(Date hiringDate) {this.hiringDate = hiringDate;}
+
+    public void setWorkingHours(Float workingHours) {this.workingHours = workingHours;}
+
+    public void setVacationDaysLeft(Integer vacationDaysLeft) {this.vacationDaysLeft = vacationDaysLeft;}
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -83,7 +110,6 @@ public class User implements UserDetails {
     public void setRole(Role role) {
         this.role = role;
     }
-
 
 
     @Override

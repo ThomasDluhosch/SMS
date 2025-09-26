@@ -57,7 +57,12 @@ public class AuthenticationService {
         User user = new User();
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
-        user.setUsername(request.getUsername());
+        user.setUsername(request.getFirstName()+"-"+request.getLastName());
+
+        user.setBirthday(request.getBirthday());
+        user.setHiringDate(request.getHiringDate());
+        user.setWorkingHours(request.getWorkingHours());
+        user.setVacationDaysLeft(request.getVacationDaysLeft());
 
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
