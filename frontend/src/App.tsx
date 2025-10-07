@@ -7,13 +7,18 @@ import Dashboard from "./components/Dashboard";
 import Users from "./components/Users/Users";
 import CreateUser from "./components/Users/CreateUser";
 import { ThemeContextProvider } from "./ThemeContext";
-import { Box } from "@mui/material";
+import { Box, CssBaseline } from "@mui/material";
 import Navigation from "./components/Navigation/Navigation";
 
 function App() {
 	return (
 		<ThemeContextProvider>
-			<Box sx={{ display: "flex" }}>
+			<CssBaseline />
+			<Box
+				sx={{
+					display: "flex",
+				}}
+			>
 				<Navigation />
 				<Routes>
 					<Route path="/login" element={<Login />} />

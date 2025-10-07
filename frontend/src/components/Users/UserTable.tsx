@@ -1,3 +1,13 @@
+import {
+	Checkbox,
+	Paper,
+	Table,
+	TableBody,
+	TableCell,
+	TableContainer,
+	TableHead,
+	TableRow,
+} from "@mui/material";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -5,6 +15,18 @@ function UserTable() {
 	const [users, setUsers] = useState([]);
 	const [error, setError] = useState<string | null>(null);
 	const navigate = useNavigate();
+
+	interface Data {
+		id: number;
+		firstname: string;
+		secondname: string;
+		username: string;
+		birthday: Date;
+		startday: Date;
+		weeklyHours: number;
+		vacationDays: number;
+		role: string;
+	}
 
 	useEffect(() => {
 		const token = localStorage.getItem("authToken");
@@ -78,36 +100,59 @@ function UserTable() {
 	}
 
 	return (
-		<table>
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Vorname</th>
-					<th>Nachname</th>
-					<th>Username</th>
-					<th>Geburtstag</th>
-					<th>Einstellung</th>
-					<th>Wochenarbeitsstunden</th>
-					<th>Urlaubstage</th>
-					<th>Rolle</th>
-				</tr>
-			</thead>
-			<tbody>
-				{users.map((user: any) => (
-					<tr key={user.id}>
-						<td>{user.id}</td>
-						<td>{user.firstName}</td>
-						<td>{user.lastName}</td>
-						<td>{user.username}</td>
-						<td>{formatDate(user.birthday)}</td>
-						<td>{formatDate(user.hiringDate)}</td>
-						<td>{user.workingHours}</td>
-						<td>{user.vacationDaysLeft}</td>
-						<td>{user.role}</td>
-					</tr>
-				))}
-			</tbody>
-		</table>
+		<>
+			<TableContainer /*component={Paper}*/>
+				<Table sx={{ minWidth: 650 }} aria-label="simple table">
+					<TableHead sx={{ fontWeight: 700 }}>
+						<TableRow>
+							<TableCell>ID</TableCell>
+							<TableCell>Vorname</TableCell>
+							<TableCell>Nachname</TableCell>
+							<TableCell>Username</TableCell>
+							<TableCell align="center">Geburtstag</TableCell>
+							<TableCell align="center">Einstellung</TableCell>
+							<TableCell align="center">Wochenstunden</TableCell>
+							<TableCell align="center">Resturlaub</TableCell>
+							<TableCell align="center">Rolle</TableCell>
+						</TableRow>
+					</TableHead>
+					<TableBody>
+						{users.map((user: any) => (
+							<TableRow
+								key={user.id}
+								// sx={{
+								// 	"&:last-child td, &:last-child th": {
+								// 		border: 0,
+								// 	},
+								// }}
+							>
+								<TableCell component="th" scope="row">
+									{user.id}
+								</TableCell>
+								<TableCell>{user.firstName}</TableCell>
+								<TableCell>{user.lastName}</TableCell>
+								<TableCell>{user.username}</TableCell>
+								<TableCell align="center">
+									{formatDate(user.birthday)}
+								</TableCell>
+								<TableCell align="center">
+									{formatDate(user.hiringDate)}
+								</TableCell>
+								<TableCell align="center">
+									{user.workingHours}
+								</TableCell>
+								<TableCell align="center">
+									{user.vacationDaysLeft}
+								</TableCell>
+								<TableCell align="center">
+									{user.role}
+								</TableCell>
+							</TableRow>
+						))}
+					</TableBody>
+				</Table>
+			</TableContainer>
+		</>
 	);
 }
 

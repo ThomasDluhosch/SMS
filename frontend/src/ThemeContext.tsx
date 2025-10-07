@@ -52,17 +52,20 @@ export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
 
 								background: {
 									default: "#f8f5fb",
-									paper: "#ffffff",
+									paper: "#f8f5fb",
 								},
+
 								text: { primary: "#0a070d" },
 						  }
 						: {
 								primary: { main: "#6f36ba" },
 								secondary: { main: "#3c166f" },
+
 								background: {
 									default: "#08040b",
-									paper: "#121212",
+									paper: "#08040b",
 								},
+
 								text: { primary: "#f5f2f8" },
 						  }),
 				},

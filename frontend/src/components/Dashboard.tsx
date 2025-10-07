@@ -1,11 +1,12 @@
+import { Container } from "react-bootstrap";
 import Navigation from "./Navigation/Navigation";
 
 const Dashboard = () => {
 	return (
-		<div className="view">
+		<Container>
 			{/* <SideBar /> */}
-			<h1>Willkommen im Dashboard!</h1>
-		</div>
+			Willkommen im Dashboard!
+		</Container>
 	);
 };
 

@@ -1,3 +1,4 @@
+import { Container, Toolbar } from "@mui/material";
 import Navigation from "../Navigation/Navigation";
 import UserTable from "./UserTable";
 import "./Users.css";
@@ -12,12 +13,13 @@ export default function Users() {
 	};
 
 	return (
-		<div className="view">
+		<Container>
+			<Toolbar />
+			{/* <div className="view"> */}
 			{/* <SideBar /> */}
 
 			<div className="content">
-
-                <h1>Alle Mitarbeiter</h1>
+				<h1>Alle Mitarbeiter</h1>
 
 				<button onClick={handleCreateUser} className="create-user-btn">
 					Neuen Benutzer anlegen
@@ -25,7 +27,8 @@ export default function Users() {
 
 				<UserTable />
 			</div>
-		</div>
+			{/* </div> */}
+		</Container>
 	);
 
 	return null;

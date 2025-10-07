@@ -3,6 +3,7 @@ import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
 import GroupsIcon from "@mui/icons-material/Groups";
 import NightlightIcon from "@mui/icons-material/Nightlight";
 import LightModeIcon from "@mui/icons-material/LightMode";
+import SettingsIcon from "@mui/icons-material/Settings";
 import {
 	AppBar,
 	Box,
@@ -18,7 +19,7 @@ import { useThemeContext } from "../../ThemeContext";
 import NavigationButton from "./NavigationButton";
 import LogoutButton from "./LogoutButton";
 
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 export default function Navigation() {
 	const userRole = localStorage.getItem("userRole");
@@ -30,7 +31,11 @@ export default function Navigation() {
 		<Box sx={{ display: "flex" }}>
 			<AppBar
 				position="fixed"
-				sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+				sx={{
+					zIndex: (theme) => theme.zIndex.drawer + 1,
+					backgroundColor: "background.paper",
+					color: "text.primary",
+				}}
 			>
 				<Toolbar className="toolBar">
 					<Typography variant="h5" noWrap component="div">
@@ -64,6 +69,7 @@ export default function Navigation() {
 						boxSizing: "border-box",
 						borderColor: "secondary.main",
 						boxShadow: 2,
+						opacity: 1,
 					},
 				}}
 			>
@@ -83,13 +89,20 @@ export default function Navigation() {
 							"/dashboard"
 						)}
 
+						{NavigationButton(
+							<SettingsIcon />,
+							"Einstellungen",
+							"/settings"
+						)}
+
 						{userRole === "ADMIN" && (
 							<>
 								<Divider
 									variant="middle"
 									sx={{
 										height: "1px",
-										borderColor: "text.primary",
+										backgroundColor: "secondary.main",
+										opacity: 1,
 									}}
 								/>
 
