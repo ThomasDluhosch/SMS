@@ -1,6 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import { Container, Navbar } from "react-bootstrap";
+import {
+	Box,
+	Button,
+	Input,
+	TextField,
+	Toolbar,
+	Typography,
+} from "@mui/material";
+import LoginIcon from "@mui/icons-material/Login";
 
 interface DecodedToken {
 	sub: string;
@@ -41,14 +51,10 @@ const Login = () => {
 				localStorage.setItem("userRole", userRole);
 				localStorage.setItem("userName", username);
 
-				if (userRole === "ADMIN") {
-					navigate("/users");
-				} else {
-					navigate("/dashboard");
-				}
+				navigate("/dashboard");
 			} else {
 				setError(
-					"Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben."
+					"Die Anmeldung ist fehlgeschlagen. \n Bitte überprüfen Sie Ihre Eingaben."
 				);
 			}
 		} catch (err) {
@@ -58,32 +64,71 @@ const Login = () => {
 	};
 
 	return (
-		<div className="login">
-			<h2>Anmeldung</h2>
+		<Container>
+			<Box
+				sx={{
+					height: "100vh",
+					display: "flex",
+					justifyContent: "center",
+					alignItems: "center",
+					flexDirection: "column",
+				}}
+			>
+				<Toolbar />
 
-			<form onSubmit={handleSubmit}>
-				<div>
-					<input
-						type="text"
-						value={username}
-						placeholder="Benutzername"
+				<Typography variant="h4">Anmelden</Typography>
+
+				<Box
+					sx={{
+						display: "flex",
+						flexDirection: "column",
+						justifyContent: "space-between",
+						width: "350px",
+					}}
+				>
+					<TextField
+						id="outlined-basic"
+						label="Benutzername"
+						variant="outlined"
+						margin="normal"
 						onChange={(e) => setUsername(e.target.value)}
 						required
+						error={!!error}
 					/>
-				</div>
-				<div>
-					<input
+
+					<TextField
+						id="outlined-basic"
+						label="Password"
+						variant="outlined"
+						margin="normal"
 						type="password"
-						value={password}
-						placeholder="Passwort"
 						onChange={(e) => setPassword(e.target.value)}
 						required
+						error={!!error}
+						helperText={error}
 					/>
-				</div>
-				<button type="submit">Anmelden</button>
-			</form>
-			{error && <p>{error}</p>}
-		</div>
+
+					<Button
+						onClick={handleSubmit}
+						endIcon={<LoginIcon />}
+						sx={{
+							color: "primary.main",
+							borderColor: "primary.main",
+							border: 2,
+							fontSize: 16,
+							mt: 2,
+							pt: 1,
+							pb: 1,
+							pl: 2,
+							pr: 2,
+							fontWeight: 500,
+						}}
+					>
+						Anmelden
+					</Button>
+				</Box>
+			</Box>
+		</Container>
 	);
 };
 
