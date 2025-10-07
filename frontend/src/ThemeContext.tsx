@@ -47,26 +47,35 @@ export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
 					mode,
 					...(mode === "light"
 						? {
-								primary: { main: "#8047c9" },
-								secondary: { main: "#b790e9" },
-
-								background: {
-									default: "#f8f5fb",
-									paper: "#f8f5fb",
+								primary: {
+									main: "#3494cb",
 								},
-
-								text: { primary: "#0a070d" },
+								secondary: {
+									main: "#7bc1ea",
+								},
+								background: {
+									default: "#fbfdfe",
+									paper: "#47b2f0",
+								},
+								text: {
+									primary: "#030607",
+								},
 						  }
 						: {
-								primary: { main: "#6f36ba" },
-								secondary: { main: "#3c166f" },
-
-								background: {
-									default: "#08040b",
-									paper: "#08040b",
+								primary: {
+									main: "#3494cb",
+								},
+								secondary: {
+									main: "#155b84",
 								},
 
-								text: { primary: "#f5f2f8" },
+								background: {
+									default: "#010304",
+									paper: "#0f7ab8",
+								},
+								text: {
+									primary: "#f8fbfc",
+								},
 						  }),
 				},
 			}),

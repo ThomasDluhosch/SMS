@@ -33,8 +33,9 @@ export default function Navigation() {
 				position="fixed"
 				sx={{
 					zIndex: (theme) => theme.zIndex.drawer + 1,
-					backgroundColor: "background.paper",
+					backgroundColor: "background.default",
 					color: "text.primary",
+					opacity: 1
 				}}
 			>
 				<Toolbar className="toolBar">
@@ -67,7 +68,8 @@ export default function Navigation() {
 					[`& .MuiDrawer-paper`]: {
 						width: drawerWidth,
 						boxSizing: "border-box",
-						borderColor: "secondary.main",
+						borderColor: "primary.main",
+						backgroundColor: "background.default",
 						boxShadow: 2,
 						opacity: 1,
 					},
@@ -101,7 +103,7 @@ export default function Navigation() {
 									variant="middle"
 									sx={{
 										height: "1px",
-										backgroundColor: "secondary.main",
+										backgroundColor: "primary.main",
 										opacity: 1,
 									}}
 								/>

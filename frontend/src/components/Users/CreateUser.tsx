@@ -1,6 +1,20 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Navigation from "../Navigation/Navigation";
+import AddIcon from "@mui/icons-material/Add";
+import {
+	Alert,
+	Box,
+	Button,
+	Container,
+	FormControl,
+	InputLabel,
+	MenuItem,
+	Select,
+	Stack,
+	TextField,
+	Toolbar,
+	Typography,
+} from "@mui/material";
 
 function CreateUser() {
 	const [formData, setFormData] = useState({
@@ -10,20 +24,22 @@ function CreateUser() {
 		role: "USER",
 		birthday: "",
 		hiringDate: "",
-		workingHours: 0,
-		vacationDaysLeft: 0,
+		workingHours: 40,
+		vacationDaysLeft: 30,
 	});
 
 	const [error, setError] = useState<string | null>(null);
 	const navigate = useNavigate();
 
 	const handleChange = (
-		e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+		e: React.ChangeEvent<
+			HTMLInputElement | { name?: string; value: unknown }
+		>
 	) => {
 		const { name, value } = e.target;
 		setFormData((prevData) => ({
 			...prevData,
-			[name]: value,
+			[name as string]: value,
 		}));
 	};
 
@@ -63,114 +79,181 @@ function CreateUser() {
 			: "";
 
 	return (
-		<div className="view">
-			<Navigation />
-			<div className="form-container">
-				<h1>Neuen Benutzer erstellen</h1>
-				<form onSubmit={handleSubmit}>
-					<div className="form-group">
-						<label htmlFor="firstName">Vorname</label>
-						<input
-							type="text"
-							id="firstName"
-							name="firstName"
-							value={formData.firstName}
-							onChange={handleChange}
-							required
-						/>
-					</div>
-					<div className="form-group">
-						<label htmlFor="lastName">Nachname</label>
-						<input
-							type="text"
-							id="lastName"
-							name="lastName"
-							value={formData.lastName}
-							onChange={handleChange}
-							required
-						/>
-					</div>
-					{
-						<div className="form-group-info">
-							Nutzername: {generatedUsername}
-						</div>
-					}
-					<div className="form-group">
-						<label htmlFor="birthday">Geburtstag</label>
-						<input
-							type="date"
-							id="birthday"
-							name="birthday"
-							value={formData.birthday}
-							onChange={handleChange}
-						/>
-					</div>
-					<div className="form-group">
-						<label htmlFor="hiringDate">Einstellungsdatum</label>
-						<input
-							type="date"
-							id="hiringDate"
-							name="hiringDate"
-							value={formData.hiringDate}
-							onChange={handleChange}
-						/>
-					</div>
-					<div className="form-group">
-						<label htmlFor="workingHours">
-							Arbeitsstunden/Woche
-						</label>
-						<input
-							type="number"
-							id="workingHours"
-							name="workingHours"
-							value={formData.workingHours}
-							onChange={handleChange}
-						/>
-					</div>
-					<div className="form-group">
-						<label htmlFor="vacationDaysLeft">
-							Verbleibende Urlaubstage
-						</label>
-						<input
-							type="number"
-							id="vacationDaysLeft"
-							name="vacationDaysLeft"
-							value={formData.vacationDaysLeft}
-							onChange={handleChange}
-						/>
-					</div>
-					<div className="form-group">
-						<label htmlFor="password">Passwort</label>
-						<input
-							type="password"
-							id="password"
-							name="password"
-							value={formData.password}
-							onChange={handleChange}
-							required
-						/>
-					</div>
-					<div className="form-group">
-						<label htmlFor="role">Rolle</label>
-						<select
+		<Container
+			sx={{
+				display: "flex",
+				justifyContent: "center",
+				alignItems: "center",
+				height: "100vh",
+			}}
+		>
+			<Box
+				component="form"
+				onSubmit={handleSubmit}
+				sx={{
+					width: "40rem",
+				}}
+			>
+				<Typography
+					variant="h4"
+					component="h1"
+					gutterBottom
+					sx={{ textAlign: "center" }}
+				>
+					Neuen Benutzer erstellen
+				</Typography>
+
+				<Box
+					sx={{ display: "flex", flexDirection: "row", gap: "2rem" }}
+				>
+					<TextField
+						label="Vorname"
+						name="firstName"
+						variant="outlined"
+						margin="normal"
+						value={formData.firstName}
+						onChange={handleChange}
+						required
+						fullWidth
+					/>
+
+					<TextField
+						label="Nachname"
+						name="lastName"
+						variant="outlined"
+						margin="normal"
+						value={formData.lastName}
+						onChange={handleChange}
+						required
+						fullWidth
+					/>
+				</Box>
+
+				<TextField
+					label="Benutzername"
+					name="userName"
+					variant="outlined"
+					margin="normal"
+					value={generatedUsername || " "}
+					onChange={handleChange}
+					slotProps={{
+						input: {
+							readOnly: true,
+						},
+					}}
+					fullWidth
+				/>
+
+				<Box
+					sx={{ display: "flex", flexDirection: "row", gap: "2rem" }}
+				>
+					<TextField
+						label="Geburtstag"
+						type="date"
+						name="birthday"
+						variant="outlined"
+						margin="normal"
+						value={formData.birthday}
+						onChange={handleChange}
+						fullWidth
+						InputLabelProps={{ shrink: true }}
+					/>
+
+					<TextField
+						label="Einstellungsdatum"
+						type="date"
+						name="hiringDate"
+						variant="outlined"
+						margin="normal"
+						value={formData.hiringDate}
+						onChange={handleChange}
+						fullWidth
+						InputLabelProps={{ shrink: true }}
+					/>
+				</Box>
+
+				<Box
+					sx={{ display: "flex", flexDirection: "row", gap: "2rem" }}
+				>
+					<TextField
+						label="Arbeitsstunden/Woche"
+						type="number"
+						name="workingHours"
+						variant="outlined"
+						margin="normal"
+						value={formData.workingHours}
+						onChange={handleChange}
+						fullWidth
+					/>
+					<TextField
+						label="Gesamte Urlaubstage"
+						type="number"
+						name="vacationDaysLeft"
+						variant="outlined"
+						margin="normal"
+						value={formData.vacationDaysLeft}
+						onChange={handleChange}
+						fullWidth
+					/>
+				</Box>
+
+				<Box
+					sx={{ display: "flex", flexDirection: "row", gap: "2rem" }}
+				>
+					<TextField
+						label="Passwort"
+						type="password"
+						name="password"
+						variant="outlined"
+						margin="normal"
+						value={formData.password}
+						onChange={handleChange}
+						required
+						fullWidth
+					/>
+
+					<FormControl fullWidth required margin="normal">
+						<InputLabel id="role-select-label">Rolle</InputLabel>
+						<Select
+							labelId="role-select-label"
 							id="role"
 							name="role"
+							variant="outlined"
 							value={formData.role}
-							onChange={handleChange}
+							label="Rolle"
+							onChange={handleChange as any}
 						>
-							<option value="USER">User</option>
-							<option value="ADMIN">Admin</option>
-						</select>
-					</div>
+							<MenuItem value="USER">User</MenuItem>
+							<MenuItem value="ADMIN">Admin</MenuItem>
+						</Select>
+					</FormControl>
+				</Box>
 
-					{error && <p className="error-message">{error}</p>}
+				{error && <Alert severity="error">{error}</Alert>}
 
-					<button type="submit" className="submit-btn">
-						Benutzer erstellen
-					</button>
-				</form>
-			</div>
-		</div>
+				<Button
+					type="submit"
+					variant="outlined"
+					size="large"
+					fullWidth
+					endIcon={<AddIcon />}
+					sx={{
+						color: "primary.main",
+						borderColor: "primary.main",
+						border: 2,
+						fontSize: 16,
+						mt: 2,
+						pt: 1,
+						pb: 1,
+						pl: 2,
+						pr: 2,
+						fontWeight: 500,
+					}}
+				>
+					Benutzer erstellen
+				</Button>
+			</Box>
+		</Container>
 	);
 }
 

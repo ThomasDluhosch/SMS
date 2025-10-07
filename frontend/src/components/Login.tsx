@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import { Container, Navbar } from "react-bootstrap";
+import { Container } from "@mui/material";
 import {
 	Box,
 	Button,
@@ -64,69 +64,67 @@ const Login = () => {
 	};
 
 	return (
-		<Container>
+		<Container
+			sx={{
+				display: "flex",
+				justifyContent: "center",
+				alignItems: "center",
+				height: "100vh",
+			}}
+		>
 			<Box
 				sx={{
-					height: "100vh",
 					display: "flex",
-					justifyContent: "center",
-					alignItems: "center",
 					flexDirection: "column",
+					justifyContent: "space-between",
+					alignItems: "center",
+					width: "20rem",
 				}}
 			>
-				<Toolbar />
-
 				<Typography variant="h4">Anmelden</Typography>
+				<TextField
+					id="outlined-basic"
+					label="Benutzername"
+					variant="outlined"
+					margin="normal"
+					onChange={(e) => setUsername(e.target.value)}
+					required
+					error={!!error}
+					fullWidth
+				/>
 
-				<Box
+				<TextField
+					id="outlined-basic"
+					label="Password"
+					variant="outlined"
+					margin="normal"
+					type="password"
+					onChange={(e) => setPassword(e.target.value)}
+					required
+					error={!!error}
+					helperText={error}
+					fullWidth
+				/>
+
+				<Button
+					onClick={handleSubmit}
+					endIcon={<LoginIcon />}
 					sx={{
-						display: "flex",
-						flexDirection: "column",
-						justifyContent: "space-between",
-						width: "350px",
+						color: "primary.main",
+						borderColor: "primary.main",
+						border: 2,
+						fontSize: 16,
+						mt: 2,
+						pt: 1,
+						pb: 1,
+						pl: 2,
+						pr: 2,
+						fontWeight: 500,
 					}}
+					fullWidth
 				>
-					<TextField
-						id="outlined-basic"
-						label="Benutzername"
-						variant="outlined"
-						margin="normal"
-						onChange={(e) => setUsername(e.target.value)}
-						required
-						error={!!error}
-					/>
-
-					<TextField
-						id="outlined-basic"
-						label="Password"
-						variant="outlined"
-						margin="normal"
-						type="password"
-						onChange={(e) => setPassword(e.target.value)}
-						required
-						error={!!error}
-						helperText={error}
-					/>
-
-					<Button
-						onClick={handleSubmit}
-						endIcon={<LoginIcon />}
-						sx={{
-							color: "primary.main",
-							borderColor: "primary.main",
-							border: 2,
-							fontSize: 16,
-							mt: 2,
-							pt: 1,
-							pb: 1,
-							pl: 2,
-							pr: 2,
-							fontWeight: 500,
-						}}
-					>
-						Anmelden
-					</Button>
-				</Box>
+					Anmelden
+				</Button>
 			</Box>
 		</Container>
 	);

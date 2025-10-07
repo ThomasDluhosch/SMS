@@ -1,5 +1,4 @@
-import { Container } from "react-bootstrap";
-import Navigation from "./Navigation/Navigation";
+import { Container } from "@mui/material";
 
 const Dashboard = () => {
 	return (

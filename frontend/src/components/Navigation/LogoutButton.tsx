@@ -18,7 +18,7 @@ export default function LogoutButton(userName: string) {
 					flexDirection: "column",
 					justifyContent: "center",
 					alignItems: "center",
-					p: 2,
+					p: 3,
 					width: "100%",
 				}}
 			>
@@ -37,6 +37,7 @@ export default function LogoutButton(userName: string) {
 						pr: 2,
 						fontWeight: 500,
 					}}
+                    fullWidth
 					onClick={handleLogout}
 				>
 					Abmelden
