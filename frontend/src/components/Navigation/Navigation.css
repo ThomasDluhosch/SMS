@@ -1,0 +1,19 @@
+.appBar {
+	color: red;
+}
+
+.toolBar {
+	display: flex;
+	justify-content: space-between;
+}
+
+.link {
+	gap: 1rem;
+	text-decoration: none;
+}
+
+.links {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import SideBar from "../SideBar";
+import Navigation from "../Navigation/Navigation";
 
 function CreateUser() {
 	const [formData, setFormData] = useState({
@@ -64,7 +64,7 @@ function CreateUser() {
 
 	return (
 		<div className="view">
-			<SideBar />
+			<Navigation />
 			<div className="form-container">
 				<h1>Neuen Benutzer erstellen</h1>
 				<form onSubmit={handleSubmit}>

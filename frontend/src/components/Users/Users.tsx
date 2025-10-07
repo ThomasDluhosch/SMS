@@ -1,4 +1,4 @@
-import SideBar from "../SideBar";
+import Navigation from "../Navigation/Navigation";
 import UserTable from "./UserTable";
 import "./Users.css";
 
@@ -13,7 +13,7 @@ export default function Users() {
 
 	return (
 		<div className="view">
-			<SideBar />
+			{/* <SideBar /> */}
 
 			<div className="content">
 
