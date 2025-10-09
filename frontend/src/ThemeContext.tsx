@@ -59,24 +59,50 @@ export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
 								},
 								text: {
 									primary: "#030607",
+									secondary: "#2a3032ff",
 								},
 						  }
 						: {
 								primary: {
-									main: "#3494cb",
+									main: "#d83131",
+									dark: "#8d1111",
+									light: "#f72020",
 								},
 								secondary: {
-									main: "#155b84",
+									main: "#bfb0b0",
+									dark: "#928c16",
+									light: "#c4e342",
 								},
 
 								background: {
-									default: "#010304",
-									paper: "#0f7ab8",
+									default: "#1f1f1f",
+									paper: "#393535ff",
 								},
 								text: {
-									primary: "#f8fbfc",
+									primary: "#f0e0e0",
+									secondary: "#9e9292ff",
 								},
 						  }),
+				},
+				typography: {
+					h1: {
+						fontSize: "3rem",
+						fontWeight: 700,
+						color: mode === "light" ? "#030607" : "#f0e0e0",
+					},
+					h2: {
+						fontSize: "2.2rem",
+						fontWeight: 500,
+					},
+					fontFamily: [
+						"Roboto",
+						"-apple-system",
+						"BlinkMacSystemFont",
+						'"Segoe UI"',
+						'"Helvetica Neue"',
+						"Arial",
+						"sans-serif",
+					].join(","),
 				},
 			}),
 		[mode]

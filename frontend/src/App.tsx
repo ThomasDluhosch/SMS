@@ -9,6 +9,7 @@ import CreateUser from "./components/Users/CreateUser";
 import { ThemeContextProvider } from "./ThemeContext";
 import { Box, CssBaseline } from "@mui/material";
 import Navigation from "./components/Navigation/Navigation";
+import Settings from "./components/Settings";
 
 function App() {
 	return (
@@ -36,6 +37,7 @@ function App() {
 						}
 					>
 						<Route path="/dashboard" element={<Dashboard />} />
+						<Route path="/settings" element={<Settings />} />
 					</Route>
 
 					<Route

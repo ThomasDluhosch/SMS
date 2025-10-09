@@ -10,9 +10,7 @@ import {
 	InputLabel,
 	MenuItem,
 	Select,
-	Stack,
 	TextField,
-	Toolbar,
 	Typography,
 } from "@mui/material";
 
@@ -27,6 +25,19 @@ function CreateUser() {
 		workingHours: 40,
 		vacationDaysLeft: 30,
 	});
+
+	console.log(getCurrentDate());
+
+	function getCurrentDate(separator = "") {
+		let newDate = new Date();
+		let date = newDate.getDate();
+		let month = newDate.getMonth() + 1;
+		let year = newDate.getFullYear();
+
+		return `${date}${separator}${
+			month < 10 ? `0${month}` : `${month}`
+		}${separator}${year}`;
+	}
 
 	const [error, setError] = useState<string | null>(null);
 	const navigate = useNavigate();
@@ -92,19 +103,32 @@ function CreateUser() {
 				onSubmit={handleSubmit}
 				sx={{
 					width: "40rem",
+					p: "2rem",
+					borderRadius: "16px",
+					boxShadow: 3,
+					backgroundColor: "background.paper",
 				}}
 			>
 				<Typography
 					variant="h4"
 					component="h1"
 					gutterBottom
-					sx={{ textAlign: "center" }}
+					sx={{
+						textAlign: "center",
+						color: "secondary.main",
+						fontWeight: 700,
+					}}
 				>
 					Neuen Benutzer erstellen
 				</Typography>
 
 				<Box
-					sx={{ display: "flex", flexDirection: "row", gap: "2rem" }}
+					sx={{
+						display: "flex",
+						flexDirection: "row",
+						gap: "2rem",
+						borderBottom: "none",
+					}}
 				>
 					<TextField
 						label="Vorname"
@@ -238,8 +262,6 @@ function CreateUser() {
 					fullWidth
 					endIcon={<AddIcon />}
 					sx={{
-						color: "primary.main",
-						borderColor: "primary.main",
 						border: 2,
 						fontSize: 16,
 						mt: 2,

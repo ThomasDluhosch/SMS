@@ -1,5 +1,6 @@
 import {
 	Checkbox,
+	Container,
 	Paper,
 	Table,
 	TableBody,
@@ -100,9 +101,17 @@ function UserTable() {
 	}
 
 	return (
-		<>
-			<TableContainer /*component={Paper}*/>
-				<Table sx={{ minWidth: 650 }} aria-label="simple table">
+		<Container
+			sx={{
+				boxShadow: 3,
+				backgroundColor: "background.paper",
+				borderRadius: "1rem",
+			}}
+		>
+			<TableContainer>
+				<Table
+					aria-label="simple table"
+				>
 					<TableHead sx={{ fontWeight: 700 }}>
 						<TableRow>
 							<TableCell>ID</TableCell>
@@ -152,7 +161,7 @@ function UserTable() {
 					</TableBody>
 				</Table>
 			</TableContainer>
-		</>
+		</Container>
 	);
 }
 
