@@ -1,8 +1,8 @@
-package com.td.backend.service;
+package com.td.backend.auth;
 
-import com.td.backend.model.AuthenticationResponse;
-import com.td.backend.model.User;
-import com.td.backend.repository.UserRepository;
+import com.td.backend.auth.model.AuthenticationResponse;
+import com.td.backend.user.model.User;
+import com.td.backend.user.repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -63,6 +63,8 @@ public class AuthenticationService {
         user.setHiringDate(request.getHiringDate());
         user.setWorkingHours(request.getWorkingHours());
         user.setVacationDaysLeft(request.getVacationDaysLeft());
+
+
 
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 

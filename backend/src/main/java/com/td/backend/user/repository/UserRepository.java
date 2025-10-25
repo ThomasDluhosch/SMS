@@ -1,6 +1,6 @@
-package com.td.backend.repository;
+package com.td.backend.user.repository;
 
-import com.td.backend.model.User;
+import com.td.backend.user.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

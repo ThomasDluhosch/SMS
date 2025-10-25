@@ -1,7 +1,6 @@
 package com.td.backend.config;
 
-import com.td.backend.filter.JwtAuthenticationFilter;
-import com.td.backend.service.UserDetailsServiceImp;
+import com.td.backend.user.UserDetailsServiceImp;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

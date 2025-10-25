@@ -1,8 +1,8 @@
-package com.td.backend.controller;
+package com.td.backend.user;
 
-import com.td.backend.model.User;
-import com.td.backend.repository.UserRepository;
-import com.td.backend.service.AuthenticationService;
+import com.td.backend.user.model.User;
+import com.td.backend.user.repository.UserRepository;
+import com.td.backend.auth.AuthenticationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

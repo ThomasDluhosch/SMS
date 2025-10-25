@@ -1,11 +1,10 @@
-package com.td.backend.service;
+package com.td.backend.auth;
 
-import com.td.backend.model.User;
+import com.td.backend.user.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
