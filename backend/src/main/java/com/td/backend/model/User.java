@@ -1,4 +1,4 @@
-package com.td.sms.model;
+package com.td.backend.model;
 
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,4 +1,4 @@
-package com.td.sms.controller;
+package com.td.backend.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

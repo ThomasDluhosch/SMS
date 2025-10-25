@@ -1,8 +1,8 @@
-package com.td.sms.controller;
+package com.td.backend.controller;
 
-import com.td.sms.model.AuthenticationResponse;
-import com.td.sms.model.User;
-import com.td.sms.service.AuthenticationService;
+import com.td.backend.model.AuthenticationResponse;
+import com.td.backend.model.User;
+import com.td.backend.service.AuthenticationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

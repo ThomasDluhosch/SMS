@@ -1,6 +1,6 @@
-package com.td.sms.service;
+package com.td.backend.service;
 
-import com.td.sms.repository.UserRepository;
+import com.td.backend.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

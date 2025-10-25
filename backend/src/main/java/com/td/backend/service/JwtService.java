@@ -1,6 +1,6 @@
-package com.td.sms.service;
+package com.td.backend.service;
 
-import com.td.sms.model.User;
+import com.td.backend.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;

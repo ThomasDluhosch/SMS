@@ -1,4 +1,4 @@
-package com.td.sms.model;
+package com.td.backend.model;
 
 public class AuthenticationResponse {
 

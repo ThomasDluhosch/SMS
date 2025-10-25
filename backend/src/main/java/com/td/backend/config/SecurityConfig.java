@@ -1,7 +1,7 @@
-package com.td.sms.config;
+package com.td.backend.config;
 
-import com.td.sms.filter.JwtAuthenticationFilter;
-import com.td.sms.service.UserDetailsServiceImp;
+import com.td.backend.filter.JwtAuthenticationFilter;
+import com.td.backend.service.UserDetailsServiceImp;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

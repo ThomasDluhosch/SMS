@@ -1,8 +1,8 @@
-package com.td.sms.service;
+package com.td.backend.service;
 
-import com.td.sms.model.AuthenticationResponse;
-import com.td.sms.model.User;
-import com.td.sms.repository.UserRepository;
+import com.td.backend.model.AuthenticationResponse;
+import com.td.backend.model.User;
+import com.td.backend.repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;

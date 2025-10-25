@@ -1,6 +1,6 @@
-package com.td.sms.repository;
+package com.td.backend.repository;
 
-import com.td.sms.model.User;
+import com.td.backend.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

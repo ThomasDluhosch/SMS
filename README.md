@@ -31,7 +31,7 @@ Due to the ongoing nature of this project, the features have been divided into t
 ## Technologies
 
 This Project is build on Java with Spring Boot and React with Typescript
-- **Frontend**: React / Yarn / *probably MUI or Bootstrap*
+- **Frontend**: NodeJS / Yarn / React / MUI
 - **Backend**: Java / Spring Boot
 - **Database**: MySQL
 - **Deployment**: *probably AWS / Docker*

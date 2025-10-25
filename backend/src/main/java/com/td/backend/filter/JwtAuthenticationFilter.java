@@ -1,7 +1,7 @@
-package com.td.sms.filter;
+package com.td.backend.filter;
 
-import com.td.sms.service.JwtService;
-import com.td.sms.service.UserDetailsServiceImp;
+import com.td.backend.service.JwtService;
+import com.td.backend.service.UserDetailsServiceImp;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

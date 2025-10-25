@@ -1,13 +1,13 @@
-package com.td.sms;
+package com.td.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SmsApplication {
+public class BackendApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SmsApplication.class, args);
+		SpringApplication.run(BackendApplication.class, args);
 	}
 
 }
