@@ -71,6 +71,16 @@ public class UserService {
     }
 
 
+    // DELETE /api/users/{id}
+    public void deleteUser(Integer id){
+        if(!userRepository.existsById(id)){
+            throw new UsernameNotFoundException("User not found");
+        }
+
+        userRepository.deleteById(id);
+    }
+
+
     private UserListDTO convertToUserListDTO(User user) {
         return new UserListDTO(
                 user.getId(),
@@ -82,6 +92,7 @@ public class UserService {
                 user.getRole()
         );
     }
+
 
     private UserDetailDTO convertToDetailDTO(User user) {
         return new UserDetailDTO(

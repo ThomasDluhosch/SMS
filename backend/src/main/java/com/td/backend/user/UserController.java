@@ -15,7 +15,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users")
 @CrossOrigin("*")
-//@CrossOrigin("http://localhost:3000")
 public class UserController {
 
     private final UserService userService;
@@ -46,4 +45,12 @@ public class UserController {
         UserDetailDTO user = userService.getUserById(id);
         return ResponseEntity.ok(user);
     }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Integer id){
+        userService.deleteUser(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

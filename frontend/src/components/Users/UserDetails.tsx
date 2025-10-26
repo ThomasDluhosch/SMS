@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Container, Toolbar, Typography } from "@mui/material";
+import { useNavigate, useParams } from "react-router-dom";
+import { Button, Container, Toolbar, Typography } from "@mui/material";
 
 interface Address {
     street: string;
@@ -24,9 +24,10 @@ interface User {
 function UserDetails() {
     const { userId } = useParams<{ userId: string }>();
     const [user, setUser] = useState<User | null>(null);
+    const token = localStorage.getItem("authToken");
+    const navigate = useNavigate();
 
     useEffect(() => {
-        const token = localStorage.getItem("authToken");
 
         if (!token) {
             console.error("Fehler: Kein Authentifizierungs-Token gefunden.");
@@ -67,6 +68,41 @@ function UserDetails() {
 
     }, [userId]);
 
+
+
+    const deleteUser = async () => {
+        try {
+            const response = await fetch(`http://localhost:8080/api/users/${userId}`, {
+                method: "DELETE",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                },
+            });
+
+            if (response.ok) {
+                console.log("User erfolgreich gelöscht!");
+                alert("Benutzer wurde gelöscht.");
+                navigate("/users");
+            } else {
+                console.error("Fehler beim Löschen:", response.status, response.statusText);
+
+                let errorMsg = `Fehler: ${response.status} ${response.statusText}`;
+                try {
+                    const errorData = await response.json();
+                    errorMsg = errorData.message || errorMsg;
+                } catch (e) {
+                }
+                alert(`Löschen fehlgeschlagen: ${errorMsg}`);
+            }
+
+        } catch (err) {
+            console.error("Ein Fehler ist beim Fetchen aufgetreten:", err);
+            alert("Ein Netzwerkfehler ist aufgetreten. Bitte prüfe deine Verbindung.");
+        }
+    };
+
+
+
     return (
         <Container sx={{ mt: 4 }}>
             <Toolbar />
@@ -98,9 +134,15 @@ function UserDetails() {
                 </>
             ) : (
                 <Typography sx={{ mt: 2 }}>
-                    Benutzerdaten werden geladen...
+                    Nutzer existiert nicht
                 </Typography>
             )}
+
+            <br></br>
+            <Button onClick={deleteUser}>
+                Nutzer Löschen
+            </Button>
+
         </Container>
     );
 }
