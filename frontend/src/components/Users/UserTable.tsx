@@ -8,6 +8,7 @@ import {
 	TableContainer,
 	TableHead,
 	TableRow,
+	Button
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -108,11 +109,12 @@ function UserTable() {
 							<TableCell align="center">Geburtstag</TableCell>
 							<TableCell align="center">Telefon</TableCell>
 							<TableCell align="center">Rolle</TableCell>
-
+							<TableCell align="center">Details</TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
 						{users.map((user: any) => (
+
 							<TableRow
 								key={user.id}
 								sx={{
@@ -120,6 +122,7 @@ function UserTable() {
 										border: 0,
 									},
 								}}
+
 							>
 								<TableCell component="th" scope="row">
 									{user.id}
@@ -135,6 +138,19 @@ function UserTable() {
 								</TableCell>
 								<TableCell align="center">
 									{user.role}
+								</TableCell>
+								<TableCell align="center">
+									<Button
+										type="submit"
+										variant="outlined"
+										sx={{
+											border: 2,
+											fontSize: 16,
+										}}
+										onClick={() => navigate(`/users/${user.id}`)}
+									>
+										Info
+									</Button>
 								</TableCell>
 							</TableRow>
 						))}
