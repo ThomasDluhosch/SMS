@@ -78,7 +78,8 @@ public class UserService {
                 user.getFirstName(),
                 user.getLastName(),
                 user.getBirthday(),
-                user.getPhone()
+                user.getPhone(),
+                user.getRole()
         );
     }
 

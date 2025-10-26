@@ -17,18 +17,6 @@ function UserTable() {
 	const [error, setError] = useState<string | null>(null);
 	const navigate = useNavigate();
 
-	interface Data {
-		id: number;
-		firstname: string;
-		secondname: string;
-		username: string;
-		birthday: Date;
-		startday: Date;
-		weeklyHours: number;
-		vacationDays: number;
-		role: string;
-	}
-
 	useEffect(() => {
 		const token = localStorage.getItem("authToken");
 
@@ -67,7 +55,6 @@ function UserTable() {
 			})
 			.then((data) => {
 				setUsers(data);
-				console.log(data);
 			})
 			.catch((error) => {
 				if (
@@ -119,21 +106,20 @@ function UserTable() {
 							<TableCell>Nachname</TableCell>
 							<TableCell>Username</TableCell>
 							<TableCell align="center">Geburtstag</TableCell>
-							<TableCell align="center">Einstellung</TableCell>
-							<TableCell align="center">Wochenstunden</TableCell>
-							<TableCell align="center">Resturlaub</TableCell>
+							<TableCell align="center">Telefon</TableCell>
 							<TableCell align="center">Rolle</TableCell>
+
 						</TableRow>
 					</TableHead>
 					<TableBody>
 						{users.map((user: any) => (
 							<TableRow
 								key={user.id}
-								// sx={{
-								// 	"&:last-child td, &:last-child th": {
-								// 		border: 0,
-								// 	},
-								// }}
+								sx={{
+									"&:last-child td, &:last-child th": {
+										border: 0,
+									},
+								}}
 							>
 								<TableCell component="th" scope="row">
 									{user.id}
@@ -145,13 +131,7 @@ function UserTable() {
 									{formatDate(user.birthday)}
 								</TableCell>
 								<TableCell align="center">
-									{formatDate(user.hiringDate)}
-								</TableCell>
-								<TableCell align="center">
-									{user.workingHours}
-								</TableCell>
-								<TableCell align="center">
-									{user.vacationDaysLeft}
+									{user.phone}
 								</TableCell>
 								<TableCell align="center">
 									{user.role}
