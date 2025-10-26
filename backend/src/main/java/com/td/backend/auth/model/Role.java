@@ -1,4 +1,4 @@
-package com.td.backend.model;
+package com.td.backend.auth.model;
 
 public enum Role {
     USER,

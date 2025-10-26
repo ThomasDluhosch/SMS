@@ -1,7 +1,6 @@
 package com.td.backend.config;
 
-import com.td.backend.filter.JwtAuthenticationFilter;
-import com.td.backend.service.UserDetailsServiceImp;
+import com.td.backend.auth.UserDetailsServiceImp;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -42,7 +41,7 @@ public class SecurityConfig {
                         req->req
                                 .requestMatchers("/login/**","/register/**").permitAll()
                                 .requestMatchers("/admin/**").hasAuthority("ADMIN")
-                                .requestMatchers("/api/createUser").hasAuthority("ADMIN")
+                                .requestMatchers("/api/users/**").hasAuthority("ADMIN")
                                 .anyRequest().authenticated()
                 ).userDetailsService(userDetailsServiceImp)
                 .sessionManagement(session->session

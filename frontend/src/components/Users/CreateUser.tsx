@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import {
@@ -10,47 +10,94 @@ import {
 	InputLabel,
 	MenuItem,
 	Select,
+	SelectChangeEvent,
 	TextField,
 	Typography,
 } from "@mui/material";
 
-function CreateUser() {
-	const [formData, setFormData] = useState({
+interface Address {
+	street: string;
+	number: string;
+	plz: string;
+	location: string;
+}
+
+interface UserFormData {
+	username: string;
+	firstName: string;
+	lastName: string;
+	birthday: string;
+	password: string;
+	phone: string;
+	role: "USER" | "ADMIN";
+	address: Address;
+}
+
+
+export default function CreateUser() {
+
+	const [formData, setFormData] = useState<UserFormData>({
+		username: "",
 		firstName: "",
 		lastName: "",
-		password: "",
-		role: "USER",
 		birthday: "",
-		hiringDate: "",
-		workingHours: 40,
-		vacationDaysLeft: 30,
+		password: "",
+		phone: "",
+		role: "USER",
+		address: {
+			street: "",
+			number: "",
+			plz: "",
+			location: "",
+		},
 	});
-
-	console.log(getCurrentDate());
-
-	function getCurrentDate(separator = "") {
-		let newDate = new Date();
-		let date = newDate.getDate();
-		let month = newDate.getMonth() + 1;
-		let year = newDate.getFullYear();
-
-		return `${date}${separator}${
-			month < 10 ? `0${month}` : `${month}`
-		}${separator}${year}`;
-	}
 
 	const [error, setError] = useState<string | null>(null);
 	const navigate = useNavigate();
 
-	const handleChange = (
-		e: React.ChangeEvent<
-			HTMLInputElement | { name?: string; value: unknown }
-		>
-	) => {
+	const { firstName, lastName } = formData;
+
+	useEffect(() => {
+		setFormData((prevData) => {
+			const newUsername =
+				firstName && lastName
+					? `${firstName}-${lastName}`.toLowerCase()
+					: "";
+
+			if (prevData.username === newUsername) {
+				return prevData;
+			}
+
+			return {
+				...prevData,
+				username: newUsername,
+			};
+		});
+	}, [firstName, lastName]);
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
 		setFormData((prevData) => ({
 			...prevData,
-			[name as string]: value,
+			[name]: value,
+		}));
+	};
+
+	const handleRoleChange = (e: SelectChangeEvent) => {
+		setFormData((prevData) => ({
+			...prevData,
+			role: e.target.value as "USER" | "ADMIN",
+		}));
+	};
+
+	const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = e.target;
+		setFormData((prevData) => ({
+			...prevData,
+			address: {
+				...prevData.address,
+				[name]: value, 
+			},
 		}));
 	};
 
@@ -60,7 +107,7 @@ function CreateUser() {
 
 		const token = localStorage.getItem("authToken");
 
-		fetch("http://localhost:8080/api/createUser", {
+		fetch("http://localhost:8080/api/users", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -84,10 +131,6 @@ function CreateUser() {
 			});
 	};
 
-	const generatedUsername =
-		formData.firstName && formData.lastName
-			? `${formData.firstName}-${formData.lastName}`
-			: "";
 
 	return (
 		<Container
@@ -158,7 +201,7 @@ function CreateUser() {
 					name="userName"
 					variant="outlined"
 					margin="normal"
-					value={generatedUsername || " "}
+					value={formData.username}
 					onChange={handleChange}
 					slotProps={{
 						input: {
@@ -184,38 +227,12 @@ function CreateUser() {
 					/>
 
 					<TextField
-						label="Einstellungsdatum"
-						type="date"
-						name="hiringDate"
+						label="Telefon"
+						type="tel"
+						name="phone"
 						variant="outlined"
 						margin="normal"
-						value={formData.hiringDate}
-						onChange={handleChange}
-						fullWidth
-						InputLabelProps={{ shrink: true }}
-					/>
-				</Box>
-
-				<Box
-					sx={{ display: "flex", flexDirection: "row", gap: "2rem" }}
-				>
-					<TextField
-						label="Arbeitsstunden/Woche"
-						type="number"
-						name="workingHours"
-						variant="outlined"
-						margin="normal"
-						value={formData.workingHours}
-						onChange={handleChange}
-						fullWidth
-					/>
-					<TextField
-						label="Gesamte Urlaubstage"
-						type="number"
-						name="vacationDaysLeft"
-						variant="outlined"
-						margin="normal"
-						value={formData.vacationDaysLeft}
+						value={formData.phone}
 						onChange={handleChange}
 						fullWidth
 					/>
@@ -242,15 +259,68 @@ function CreateUser() {
 							labelId="role-select-label"
 							id="role"
 							name="role"
-							variant="outlined"
 							value={formData.role}
 							label="Rolle"
-							onChange={handleChange as any}
+							onChange={handleRoleChange}
 						>
 							<MenuItem value="USER">User</MenuItem>
 							<MenuItem value="ADMIN">Admin</MenuItem>
 						</Select>
 					</FormControl>
+				</Box>
+
+				<Typography
+					variant="h6"
+					component="h2"
+					sx={{ mt: 2, mb: -1, color: "text.secondary" }}
+				>
+					Adresse
+				</Typography>
+
+				<Box
+					sx={{ display: "flex", flexDirection: "row", gap: "2rem" }}
+				>
+					<TextField
+						label="Straße"
+						name="street"
+						variant="outlined"
+						margin="normal"
+						value={formData.address.street}
+						onChange={handleAddressChange}
+						fullWidth
+					/>
+					<TextField
+						label="Nr."
+						name="number"
+						variant="outlined"
+						margin="normal"
+						value={formData.address.number}
+						onChange={handleAddressChange}
+						sx={{ maxWidth: "100px" }}
+					/>
+				</Box>
+
+				<Box
+					sx={{ display: "flex", flexDirection: "row", gap: "2rem" }}
+				>
+					<TextField
+						label="PLZ"
+						name="plz"
+						variant="outlined"
+						margin="normal"
+						value={formData.address.plz}
+						onChange={handleAddressChange}
+						sx={{ maxWidth: "120px" }}
+					/>
+					<TextField
+						label="Ort"
+						name="location"
+						variant="outlined"
+						margin="normal"
+						value={formData.address.location}
+						onChange={handleAddressChange}
+						fullWidth
+					/>
 				</Box>
 
 				{error && <Alert severity="error">{error}</Alert>}
@@ -274,9 +344,8 @@ function CreateUser() {
 				>
 					Benutzer erstellen
 				</Button>
+
 			</Box>
 		</Container>
 	);
 }
-
-export default CreateUser;

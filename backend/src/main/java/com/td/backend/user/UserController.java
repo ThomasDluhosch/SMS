@@ -1,0 +1,49 @@
+package com.td.backend.user;
+
+import com.td.backend.user.dto.CreateUserDTO;
+import com.td.backend.user.dto.UserDetailDTO;
+import com.td.backend.user.dto.UserListDTO;
+import com.td.backend.user.model.User;
+import com.td.backend.user.repository.UserRepository;
+import com.td.backend.auth.AuthenticationService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/users")
+@CrossOrigin("*")
+//@CrossOrigin("http://localhost:3000")
+public class UserController {
+
+    private final UserService userService;
+
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+
+    @GetMapping
+    public ResponseEntity<List<UserListDTO>> getAllUsers() {
+        List<UserListDTO> users = userService.getAllUsers();
+        return ResponseEntity.ok(users);
+    }
+
+
+    @PostMapping()
+    public ResponseEntity<UserDetailDTO> createUser(@RequestBody CreateUserDTO userDTO) {
+        User savedUser = userService.createUser(userDTO);
+        UserDetailDTO responseDTO = userService.getUserById(savedUser.getId());
+        return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
+    }
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDetailDTO> getUserById(@PathVariable Integer id) {
+        UserDetailDTO user = userService.getUserById(id);
+        return ResponseEntity.ok(user);
+    }
+}
