@@ -41,7 +41,7 @@ public class SecurityConfig {
                         req->req
                                 .requestMatchers("/login/**","/register/**").permitAll()
                                 .requestMatchers("/admin/**").hasAuthority("ADMIN")
-                                .requestMatchers("/api/createUser").hasAuthority("ADMIN")
+                                .requestMatchers("/api/users/**").hasAuthority("ADMIN")
                                 .anyRequest().authenticated()
                 ).userDetailsService(userDetailsServiceImp)
                 .sessionManagement(session->session
