@@ -53,23 +53,4 @@ public class AuthenticationService {
         return new AuthenticationResponse(token);
     }
 
-    public User createUser(User request) {
-        User user = new User();
-        user.setFirstName(request.getFirstName());
-        user.setLastName(request.getLastName());
-        user.setUsername(request.getFirstName()+"-"+request.getLastName());
-
-        user.setBirthday(request.getBirthday());
-        user.setHiringDate(request.getHiringDate());
-        user.setWorkingHours(request.getWorkingHours());
-        user.setVacationDaysLeft(request.getVacationDaysLeft());
-
-
-
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
-
-        user.setRole(request.getRole());
-
-        return userRepository.save(user);
-    }
 }

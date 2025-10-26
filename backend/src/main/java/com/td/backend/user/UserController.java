@@ -1,5 +1,8 @@
 package com.td.backend.user;
 
+import com.td.backend.user.dto.CreateUserDTO;
+import com.td.backend.user.dto.UserDetailDTO;
+import com.td.backend.user.dto.UserListDTO;
 import com.td.backend.user.model.User;
 import com.td.backend.user.repository.UserRepository;
 import com.td.backend.auth.AuthenticationService;
@@ -10,27 +13,37 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/users")
 @CrossOrigin("*")
 //@CrossOrigin("http://localhost:3000")
 public class UserController {
 
-    private final UserRepository userRepository;
-    private final AuthenticationService authenticationService;
+    private final UserService userService;
 
-    public UserController(UserRepository userRepository, AuthenticationService authenticationService) {
-        this.userRepository = userRepository;
-        this.authenticationService = authenticationService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-    @GetMapping("/api/users")
-    public ResponseEntity<List<User>> getAllUsers() {
-        List<User> users = userRepository.findAll();
+
+    @GetMapping
+    public ResponseEntity<List<UserListDTO>> getAllUsers() {
+        List<UserListDTO> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
 
-    @PostMapping("/api/createUser")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User savedUser = authenticationService.createUser(user);
-        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+
+    @PostMapping()
+    public ResponseEntity<UserDetailDTO> createUser(@RequestBody CreateUserDTO userDTO) {
+        User savedUser = userService.createUser(userDTO);
+        UserDetailDTO responseDTO = userService.getUserById(savedUser.getId());
+        return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
+    }
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDetailDTO> getUserById(@PathVariable Integer id) {
+        UserDetailDTO user = userService.getUserById(id);
+        return ResponseEntity.ok(user);
     }
 }

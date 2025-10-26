@@ -1,4 +1,4 @@
-package com.td.backend.user;
+package com.td.backend.auth;
 
 import com.td.backend.user.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;

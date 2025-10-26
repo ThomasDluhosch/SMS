@@ -1,6 +1,6 @@
 package com.td.backend.config;
 
-import com.td.backend.user.UserDetailsServiceImp;
+import com.td.backend.auth.UserDetailsServiceImp;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

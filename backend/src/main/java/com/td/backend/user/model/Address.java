@@ -1,5 +1,6 @@
 package com.td.backend.user.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +10,8 @@ import lombok.Setter;
 public class Address {
 
     @Id
-    private Long id;
+    @Column(name = "user_id")
+    private Integer id;
 
     @Getter @Setter
     private String street;
@@ -24,8 +26,10 @@ public class Address {
     private String location;
 
     @OneToOne
-    @MapsId
-    @JoinColumn(name = "user_id")
+    @MapsId // Sagt: "Fülle das @Id-Feld (id) mit der ID dieser Beziehung"
+    @JoinColumn(name = "user_id") // Sagt: "Die Spalte für diese Beziehung ist 'user_id'"
+    @Setter
+    @JsonBackReference
     private User user;
 
 }

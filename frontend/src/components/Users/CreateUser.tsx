@@ -60,7 +60,7 @@ function CreateUser() {
 
 		const token = localStorage.getItem("authToken");
 
-		fetch("http://localhost:8080/api/createUser", {
+		fetch("http://localhost:8080/api/users", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

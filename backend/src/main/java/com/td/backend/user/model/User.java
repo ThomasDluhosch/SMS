@@ -1,5 +1,6 @@
 package com.td.backend.user.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.td.backend.auth.model.Role;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -40,7 +41,21 @@ public class User implements UserDetails {
     @Getter @Setter
     private String phone;
 
-    //private Address address;
+    @Getter
+    @OneToOne( mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private Address address;
+
+    public void setAddress(Address address) {
+        if (address == null) {
+            if (this.address != null) {
+                this.address.setUser(null);
+            }
+        } else {
+            address.setUser(this);
+        }
+        this.address = address;
+    }
 
     @Getter @Setter
     @Column(name = "hiring_date")

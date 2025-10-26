@@ -1,7 +1,7 @@
 package com.td.backend.config;
 
 import com.td.backend.auth.JwtService;
-import com.td.backend.user.UserDetailsServiceImp;
+import com.td.backend.auth.UserDetailsServiceImp;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
