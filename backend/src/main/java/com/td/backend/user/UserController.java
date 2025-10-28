@@ -1,6 +1,7 @@
 package com.td.backend.user;
 
 import com.td.backend.user.dto.CreateUserDTO;
+import com.td.backend.user.dto.UpdateUserDTO;
 import com.td.backend.user.dto.UserDetailDTO;
 import com.td.backend.user.dto.UserListDTO;
 import com.td.backend.user.model.User;
@@ -15,7 +16,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users")
 @CrossOrigin("*")
-//@CrossOrigin("http://localhost:3000")
 public class UserController {
 
     private final UserService userService;
@@ -46,4 +46,19 @@ public class UserController {
         UserDetailDTO user = userService.getUserById(id);
         return ResponseEntity.ok(user);
     }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UserDetailDTO> updateUser(@PathVariable Integer id, @RequestBody UpdateUserDTO userDTO) {
+        UserDetailDTO updatedUser = userService.updateUser(id, userDTO);
+        return ResponseEntity.ok(updatedUser);
+    }
+    
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Integer id){
+        userService.deleteUser(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

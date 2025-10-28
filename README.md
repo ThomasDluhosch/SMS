@@ -11,10 +11,9 @@ Due to the ongoing nature of this project, the features have been divided into t
 
 ### Implemented
 - Authorization, Authentication and Role-based access ( `ADMIN`, `USER`)
-- Admins can create and read employee data from the database
+- Admins can create, read, update and delete employee data from the database
 
 ### Planned
-- ADMINS can update and delete employees
 - USERS can clock in / out
 - USERS can call in sick
 - Overtime calculation

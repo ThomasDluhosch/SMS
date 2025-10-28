@@ -2,10 +2,7 @@ package com.td.backend.user;
 
 import com.td.backend.auth.AuthenticationService;
 import com.td.backend.auth.model.Role;
-import com.td.backend.user.dto.AddressDTO;
-import com.td.backend.user.dto.CreateUserDTO;
-import com.td.backend.user.dto.UserDetailDTO;
-import com.td.backend.user.dto.UserListDTO;
+import com.td.backend.user.dto.*;
 import com.td.backend.user.model.Address;
 import com.td.backend.user.model.User;
 import com.td.backend.user.repository.UserRepository;
@@ -71,6 +68,51 @@ public class UserService {
     }
 
 
+    // UPDATE /api/users/{id}
+    @Transactional
+    public UserDetailDTO updateUser(Integer id, UpdateUserDTO dto ) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with"));
+
+        user.setUsername(dto.username());
+        user.setFirstName(dto.firstName());
+        user.setLastName(dto.lastName());
+        user.setBirthday(dto.birthday());
+        user.setPhone(dto.phone());
+        user.setRole(dto.role());
+
+        AddressDTO adrDto = dto.address();
+        Address address = user.getAddress(); // Bestehende Adresse holen (kann null sein)
+
+        if (adrDto != null) {
+            if (address == null) {
+                address = new Address();
+            }
+
+            address.setStreet(adrDto.street());
+            address.setNumber(adrDto.number());
+            address.setPlz(adrDto.plz());
+            address.setLocation(adrDto.location());
+            user.setAddress(address);
+        } else {
+            user.setAddress(null);
+        }
+
+        User updatedUser = userRepository.save(user);
+        return convertToDetailDTO(updatedUser);
+    }
+
+
+    // DELETE /api/users/{id}
+    public void deleteUser(Integer id){
+        if(!userRepository.existsById(id)){
+            throw new UsernameNotFoundException("User not found");
+        }
+
+        userRepository.deleteById(id);
+    }
+
+
     private UserListDTO convertToUserListDTO(User user) {
         return new UserListDTO(
                 user.getId(),
@@ -82,6 +124,7 @@ public class UserService {
                 user.getRole()
         );
     }
+
 
     private UserDetailDTO convertToDetailDTO(User user) {
         return new UserDetailDTO(
