@@ -18,6 +18,13 @@ interface User {
     phone: string | null;
     role: "USER" | "ADMIN";
     address: Address;
+    contract: Contract;
+}
+
+interface Contract {
+    hiringDate: string;
+    monthlyHours: string;
+    maxVacationDays: string;
 }
 
 interface UpdateUserPayload {
@@ -32,6 +39,11 @@ interface UpdateUserPayload {
         number: string;
         plz: string;
         location: string;
+    }
+    contract: {
+        hiringDate: string;
+        monthlyHours: string;
+        maxVacationDays: string;
     }
 }
 
@@ -156,6 +168,16 @@ function UserDetails() {
                 };
             }
 
+            if (['hiringDate', 'monthlyHours', 'maxVacationDays'].includes(name)) {
+                return {
+                    ...prevUser,
+                    contract: {
+                        ...(prevUser.contract || {}),
+                        [name]: value
+                    }
+                };
+            }
+
             const updatedUser = {
                 ...prevUser,
                 [name]: value
@@ -193,6 +215,11 @@ function UserDetails() {
                 number: user.address.number,
                 plz: user.address.plz,
                 location: user.address.location,
+            },
+            contract: {
+                hiringDate: user.contract.hiringDate,
+                monthlyHours: user.contract.monthlyHours,
+                maxVacationDays: user.contract.maxVacationDays
             }
         };
 
@@ -294,6 +321,22 @@ function UserDetails() {
                     <TextField
                         {...textFieldProps("location", "Ort", user.address?.location)}
                     />
+
+                    <Typography variant="h6" sx={{ mt: 2 }}>Vertrag</Typography>
+
+                    <TextField
+                        {...textFieldProps("hiringDate", "Einstellungsdatum", user.contract.hiringDate)}
+                    />
+
+                    <TextField
+                        {...textFieldProps("maxVacationDays", "Maximale Urlaubstage", user.contract.maxVacationDays)}
+                    />
+
+                    <TextField
+                        {...textFieldProps("monthlyHours", "Monatliche Stunden", user.contract.monthlyHours)}
+                    />
+
+
 
                     <Typography variant="h6" sx={{ mt: 2 }}>Rolle</Typography>
                     <Select
