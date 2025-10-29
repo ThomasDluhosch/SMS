@@ -5,31 +5,31 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Entity
-@Table(name = "address")
-public class Address {
+@Table(name = "contract")
+public class Contract {
 
     @Id
     @Column(name = "user_id")
     private Integer id;
 
     @Getter @Setter
-    private String street;
+    private Date hiringDate;
 
     @Getter @Setter
-    private String number;
+    private Float monthlyHours;
 
     @Getter @Setter
-    private String plz;
-
-    @Getter @Setter
-    private String location;
+    private Float maxVacationDays;
 
     @OneToOne
     @MapsId
     @JoinColumn(name = "user_id")
     @Setter
-    @JsonBackReference("user-address")
+    @JsonBackReference("user-contract")
     private User user;
+
 
 }

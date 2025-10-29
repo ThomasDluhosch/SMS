@@ -43,8 +43,14 @@ public class User implements UserDetails {
 
     @Getter
     @OneToOne( mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference("user-address")
     private Address address;
+
+    @Getter
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("user-contract")
+    private Contract contract;
+
 
     public void setAddress(Address address) {
         if (address == null) {
@@ -57,26 +63,21 @@ public class User implements UserDetails {
         this.address = address;
     }
 
-    @Getter @Setter
-    @Column(name = "hiring_date")
-    private Date hiringDate;
-
-    @Getter @Setter
-    @Column(name = "working_hours")
-    private Float workingHours;
-
-    @Getter @Setter
-    @Column(name = "vacation_days_left")
-    private Integer vacationDaysLeft;
-
+    public void setContract(Contract contract) {
+        if (contract == null) {
+            if (this.contract != null) {
+                this.contract.setUser(null);
+            }
+        } else {
+            contract.setUser(this);
+        }
+        this.contract = contract;
+    }
 
 
     @Getter @Setter
     @Enumerated(EnumType.STRING)
     private Role role;
-
-
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

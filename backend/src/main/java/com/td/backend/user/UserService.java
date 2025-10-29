@@ -1,9 +1,8 @@
 package com.td.backend.user;
 
-import com.td.backend.auth.AuthenticationService;
-import com.td.backend.auth.model.Role;
 import com.td.backend.user.dto.*;
 import com.td.backend.user.model.Address;
+import com.td.backend.user.model.Contract;
 import com.td.backend.user.model.User;
 import com.td.backend.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -48,13 +47,10 @@ public class UserService {
         user.setLastName(dto.lastName());
         user.setBirthday(dto.birthday());
         user.setPhone(dto.phone());
-
         user.setPassword(passwordEncoder.encode(dto.password()));
-
         user.setRole(dto.role());
 
         Address newAddress = new Address();
-
         if (dto.address() != null) {
             AddressDTO adrDto = dto.address();
             newAddress.setStreet(adrDto.street());
@@ -62,8 +58,17 @@ public class UserService {
             newAddress.setPlz(adrDto.plz());
             newAddress.setLocation(adrDto.location());
         }
-
         user.setAddress(newAddress);
+
+        Contract newContract = new Contract();
+        if (dto.contract() != null) {
+            ContractDTO conDto = dto.contract();
+            newContract.setHiringDate(conDto.hiringDate());
+            newContract.setMonthlyHours(conDto.monthlyHours());
+            newContract.setMaxVacationDays(conDto.maxVacationDays());
+        }
+        user.setContract(newContract);
+
         return userRepository.save(user);
     }
 
@@ -82,8 +87,7 @@ public class UserService {
         user.setRole(dto.role());
 
         AddressDTO adrDto = dto.address();
-        Address address = user.getAddress(); // Bestehende Adresse holen (kann null sein)
-
+        Address address = user.getAddress();
         if (adrDto != null) {
             if (address == null) {
                 address = new Address();
@@ -96,6 +100,20 @@ public class UserService {
             user.setAddress(address);
         } else {
             user.setAddress(null);
+        }
+
+        ContractDTO conDto = dto.contract();
+        Contract contract = user.getContract();
+        if (conDto != null) {
+            if (contract == null) {
+                contract = new Contract();
+            }
+            contract.setHiringDate(conDto.hiringDate());
+            contract.setMonthlyHours(conDto.monthlyHours());
+            contract.setMaxVacationDays(conDto.maxVacationDays());
+            user.setContract(contract);
+        } else {
+            user.setContract(null);
         }
 
         User updatedUser = userRepository.save(user);
@@ -134,11 +152,9 @@ public class UserService {
                 user.getLastName(),
                 user.getBirthday(),
                 user.getPhone(),
-                user.getHiringDate(),
-                user.getWorkingHours(),
-                user.getVacationDaysLeft(),
                 user.getRole(),
-                user.getAddress()
+                user.getAddress(),
+                user.getContract()
         );
     }
 }

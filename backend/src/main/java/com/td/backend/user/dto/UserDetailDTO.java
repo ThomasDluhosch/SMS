@@ -2,6 +2,8 @@ package com.td.backend.user.dto;
 
 import com.td.backend.auth.model.Role;
 import com.td.backend.user.model.Address;
+import com.td.backend.user.model.Contract;
+
 import java.util.Date;
 
 public record UserDetailDTO(
@@ -11,9 +13,7 @@ public record UserDetailDTO(
         String lastName,
         Date birthday,
         String phone,
-        Date hiringDate,
-        Float workingHours,
-        Integer vacationDaysLeft,
         Role role,
-        Address address
+        Address address,
+        Contract contract
 ) {}

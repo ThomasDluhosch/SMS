@@ -12,5 +12,6 @@ public record CreateUserDTO(
         String password,
         String phone,
         Role role,
-        AddressDTO address
+        AddressDTO address,
+        ContractDTO contract
 ) {}

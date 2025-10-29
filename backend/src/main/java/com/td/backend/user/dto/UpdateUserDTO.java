@@ -11,5 +11,6 @@ public record UpdateUserDTO (
         Date birthday,
         String phone,
         Role role,
-        AddressDTO address
+        AddressDTO address,
+        ContractDTO contract
 ) {}
