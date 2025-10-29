@@ -22,6 +22,12 @@ interface Address {
 	location: string;
 }
 
+interface Contract {
+	hiringDate: string;
+	monthlyHours: string;
+	maxVacationDays: string;
+}
+
 interface UserFormData {
 	username: string;
 	firstName: string;
@@ -31,6 +37,7 @@ interface UserFormData {
 	phone: string;
 	role: "USER" | "ADMIN";
 	address: Address;
+	contract: Contract;
 }
 
 
@@ -49,6 +56,11 @@ export default function CreateUser() {
 			number: "",
 			plz: "",
 			location: "",
+		},
+		contract: {
+			hiringDate: "",
+			monthlyHours: "40",
+			maxVacationDays: "30",
 		},
 	});
 
@@ -96,7 +108,18 @@ export default function CreateUser() {
 			...prevData,
 			address: {
 				...prevData.address,
-				[name]: value, 
+				[name]: value,
+			},
+		}));
+	};
+
+	const handleContractChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = e.target;
+		setFormData((prevData) => ({
+			...prevData,
+			contract: {
+				...prevData.contract,
+				[name]: value,
 			},
 		}));
 	};
@@ -319,6 +342,51 @@ export default function CreateUser() {
 						margin="normal"
 						value={formData.address.location}
 						onChange={handleAddressChange}
+						fullWidth
+					/>
+				</Box>
+
+				<Typography
+					variant="h6"
+					component="h2"
+					sx={{ mt: 2, mb: -1, color: "text.secondary" }}
+				>
+					Vertragsdetails
+				</Typography>
+
+				<TextField
+					label="Einstellungsdatum"
+					type="date"
+					name="hiringDate"
+					variant="outlined"
+					margin="normal"
+					value={formData.contract.hiringDate}
+					onChange={handleContractChange}
+					fullWidth
+					InputLabelProps={{ shrink: true }}
+				/>
+
+				<Box
+					sx={{ display: "flex", flexDirection: "row", gap: "2rem" }}
+				>
+					<TextField
+						label="Monatliche Stunden"
+						type="number"
+						name="monthlyHours"
+						variant="outlined"
+						margin="normal"
+						value={formData.contract.monthlyHours}
+						onChange={handleContractChange}
+						fullWidth
+					/>
+					<TextField
+						label="Max. Urlaubstage"
+						type="number"
+						name="maxVacationDays"
+						variant="outlined"
+						margin="normal"
+						value={formData.contract.maxVacationDays}
+						onChange={handleContractChange}
 						fullWidth
 					/>
 				</Box>
