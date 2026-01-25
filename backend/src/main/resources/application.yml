@@ -21,3 +21,9 @@ logging:
   level:
     org.hibernate.SQL: INFO
     org.hibernate: INFO
+
+app:
+  jwtSecret: ${JWT_SECRET}
+  jwtExpirationMs: ${JWT_EXPIRATION}
+  jwtRefreshExpirationMs: ${JWT_REFRESH_EXPIRATION}
+    
