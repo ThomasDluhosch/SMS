@@ -22,3 +22,16 @@
 
 ### Future
 - Clocking in / out via. physical RFID chip
+
+## How to start
+
+Clone this repository and navigate to the root directory.
+
+### Local
+- Type `docker-compose up -d postgres` to start the database
+- Add application-local.yml to `backend/src/main/resources/` 
+- Fill in the values 'url', 'username' and 'password' for datasource
+- Type `./mvnw spring-boot:run -Dspring-boot.run.profiles=local` to start the backend
+
+### Docker
+- Type `docker-compose up -d --build` to start the backend and the database

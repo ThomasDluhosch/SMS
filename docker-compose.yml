@@ -1,15 +1,33 @@
 services:
   postgres:
     image: postgres:15-alpine
+    container_name: sms-postgres
     environment:
-      POSTGRES_DB: sms
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
       - postgres-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
 
+  backend:
+    build: ./backend
+    container_name: sms-backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/sms
+      - SPRING_DATASOURCE_USERNAME=${POSTGRES_USER}
+      - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD}
+
 volumes:
   postgres-data:
+
+
+networks:
+  app-network:
+    driver: bridge
