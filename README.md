@@ -31,6 +31,7 @@ Clone this repository and navigate to the root directory.
 - Type `docker-compose up -d postgres` to start the database
 - Add application-local.yml to `backend/src/main/resources/` 
 - Fill in the values 'url', 'username' and 'password' for datasource
+- Fill in the values 'jwtSecret', 'jwtExpirationMs' and 'jwtRefreshExpirationMs' for app
 - Type `./mvnw spring-boot:run -Dspring-boot.run.profiles=local` to start the backend
 
 ### Docker
