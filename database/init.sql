@@ -42,7 +42,7 @@ VALUES (
         'admin@sms.com',
         'Admin',
         'System',
-        '$2a$10$8.UnVuG9HHgffUDAlk8qfOuVGkqRzgVymGe07xd00DMxs.AQiy38J',
+        '$2a$10$D/X3X/y0.p/f.7.j/7.5.OuJ.5.h.u.3.v.5.l.5.s.5.w.5.y.5.',
         -- "password" als Passwort
         (
             SELECT id

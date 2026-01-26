@@ -4,10 +4,9 @@
 ## Features
 
 ### Implemented
-- /
+- Authorization, Authentication and Role-based access (ADMIN, USER) with JWT and RefreshToken
 
 ### Planned
-- Authorization, Authentication and Role-based access (ADMIN, USER)
 - ADMINS can create, read, update and delete employee data from the database
 - ADMINS can create departments and assign employees to them
 - ADMINS can create shifts and assign employees to them
